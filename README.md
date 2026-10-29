@@ -2,11 +2,13 @@
   1、在 Releases 下载最新的 .mcpb 安装包。
   2、打开 Claude Desktop → 设置 → 扩展 → 浏览插件 → 高级设置 → 安装扩展。
   3、选择下载的 .mcpb 文件，确认安装。
-  4、安装完成后，确认 CCMemories for Claude 已启用。
+  4、安装完成后，添加Codex数据和缓存配置。然后确认 CCMemories for Claude 已启用。
   5、新建一个普通聊天，即可让 Claude 搜索和读取 Codex 会话。
 💬例如，直接发送：
 > 搜索最近的 Codex 工作会话。
+
 > 读取“CCMemories”工作会话。
+
 > 继续读取这条会话更早的消息。
 
 ## 主要功能
