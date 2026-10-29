@@ -4,6 +4,7 @@
   3、选择下载的 .mcpb 文件，确认安装。
   4、安装完成后，添加Codex数据和缓存配置。然后确认 CCMemories for Claude 已启用。
   5、新建一个普通聊天，即可让 Claude 搜索和读取 Codex 会话。
+
 💬例如，直接发送：
 > 搜索最近的 Codex 工作会话。
 
