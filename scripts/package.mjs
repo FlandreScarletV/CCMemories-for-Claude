@@ -56,7 +56,7 @@ function removeStaging() {
   rmSync(actual, { recursive: true, force: true });
 }
 
-const runtime = ['manifest.json', 'package.json', 'package-lock.json', '.mcpbignore', 'server', 'vendor'];
+const runtime = ['manifest.json', 'package.json', 'package-lock.json', '.mcpbignore', 'thread-sources.example.json', 'server', 'vendor'];
 const documents = readdirSync(project).filter(name => /^(README|LICENSE|COPYING|CHANGELOG)(?:\..+)?$/i.test(name));
 for (const name of [...runtime, ...documents]) cpSync(join(project, name), join(staging, name), { recursive: true });
 const installation = spawnSync(process.execPath, [npmCli, 'ci', '--omit=dev', '--ignore-scripts',
@@ -78,13 +78,14 @@ const bundleEntries = unzipSync(bundleBytes);
 safeArchiveNames(Object.keys(bundleEntries));
 const executables = filesIn(join(staging, 'node_modules')).filter(file =>
   /\.(?:mjs|cjs|js|json|node|wasm)$/.test(file) && basename(file) !== '.package-lock.json');
-for (const file of [join(staging, 'server/index.mjs'), join(staging, 'vendor/thread-store.mjs'), ...executables]) {
+const ownRuntime = ['server', 'vendor'].flatMap(folder => filesIn(join(staging, folder)));
+for (const file of [...ownRuntime, ...executables]) {
   const name = slash(relative(staging, file));
   if (!bundleEntries[name] || hash(bundleEntries[name]) !== hash(readFileSync(file)))
     throw new Error(`The bundle omitted or changed a runtime file: ${name}`);
 }
 
-const sourceNames = ['package.json', 'package-lock.json', 'manifest.json', '.gitignore', '.gitattributes', '.mcpbignore', ...documents];
+const sourceNames = ['package.json', 'package-lock.json', 'manifest.json', '.gitignore', '.gitattributes', '.mcpbignore', 'thread-sources.example.json', ...documents];
 for (const folder of ['server', 'vendor', 'scripts', '.github', 'docs']) {
   if (existsSync(join(project, folder)))
     sourceNames.push(...filesIn(join(project, folder)).map(file => slash(relative(project, file))));
@@ -101,7 +102,7 @@ writeFileSync(join(output, sourceName), sourceBytes);
 writeFileSync(join(output, 'SHA256SUMS'),
   `${hash(bundleBytes)}  ${bundleName}\n${hash(sourceBytes)}  ${sourceName}\n`);
 writeFileSync(join(build, 'release-audit.json'), JSON.stringify({ version: metadata.version,
-  bundleEntries: Object.keys(bundleEntries).length, runtimeFilesChecked: executables.length + 2,
+  bundleEntries: Object.keys(bundleEntries).length, runtimeFilesChecked: executables.length + ownRuntime.length,
   sourceEntries: Object.keys(sourceEntries).length, productionDependenciesOnly: true,
   parserSha256: hash(readFileSync(join(project, 'vendor/thread-store.mjs'))),
   artifacts: [bundleName, sourceName, 'SHA256SUMS'] }, null, 2) + '\n');

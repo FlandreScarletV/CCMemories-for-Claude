@@ -2,8 +2,8 @@
   "manifest_version": "0.3",
   "name": "ccmemories-claude",
   "display_name": "CCMemories for Claude",
-  "version": "0.1.3",
-  "description": "在 Claude Desktop Chat 中按需搜索和读取本机 Codex 工作会话。",
+  "version": "0.1.4",
+  "description": "在 Claude Desktop Chat 中按需搜索和读取本机或已配置 SSH 来源的 Codex 工作会话。",
   "author": {
     "name": "Local developer"
   },
@@ -17,6 +17,7 @@
       ],
       "env": {
         "CODEX_CONVERSATION_ROOT": "${user_config.codex_home}",
+        "CCMEMORIES_SOURCES_FILE": "${user_config.sources_file}",
         "TEMP": "${user_config.cache_directory}",
         "TMP": "${user_config.cache_directory}",
         "XDG_CACHE_HOME": "${user_config.cache_directory}",
@@ -25,6 +26,13 @@
     }
   },
   "user_config": {
+    "sources_file": {
+      "type": "file",
+      "title": "SSH 数据源配置文件（可选）",
+      "description": "选择含 sources 数组的 JSON 配置文件；SSH 使用系统 OpenSSH 与已有密钥配置。留空时只读取本机。",
+      "required": false,
+      "default": ""
+    },
     "codex_home": {
       "type": "directory",
       "title": "Codex 数据目录",
@@ -41,11 +49,11 @@
   "tools": [
     {
       "name": "list_work_threads",
-      "description": "列出最近的本地 Codex 工作会话"
+      "description": "列出本机或已配置 SSH 来源的最近 Codex 工作会话"
     },
     {
       "name": "search_work_threads",
-      "description": "按标题查找本地 Codex 工作会话"
+      "description": "按标题查找本机或已配置 SSH 来源的 Codex 工作会话"
     },
     {
       "name": "search_work_messages",

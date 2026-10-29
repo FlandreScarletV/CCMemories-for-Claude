@@ -1,5 +1,10 @@
 {
   "source": "CCMemories/thread-store.mjs",
   "sha256": "6db932ce1ecdd01c366d465b817773e9cc608f3fc49748d3479ef820738f1f30",
+  "files": {
+    "thread-store.mjs": "6db932ce1ecdd01c366d465b817773e9cc608f3fc49748d3479ef820738f1f30",
+    "thread-sources.mjs": "47509dd7c3cce548f25bda44ee224781463c21f2930d8ee0a4cfb8c145e445fa",
+    "ssh-source.mjs": "9e95757b9b922bf7099f808762e9ce5313f8b1e1ea9976390ff62e1ec58a1da0"
+  },
   "maintenance": "Generated from the CCMemories source; edit upstream and run sync-core. Do not maintain a second parser."
 }

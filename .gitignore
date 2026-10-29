@@ -1,6 +1,9 @@
 node_modules/
 build/
 release/
+.runtime/
+thread-sources.json
+*.local.json
 .env
 .env.*
 *.log

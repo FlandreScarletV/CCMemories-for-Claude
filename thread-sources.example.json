@@ -1,0 +1,10 @@
+{
+  "sources": [
+    {
+      "id": "remote-server",
+      "label": "Remote server",
+      "type": "ssh",
+      "host": "your-ssh-host"
+    }
+  ]
+}

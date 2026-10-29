@@ -10,10 +10,16 @@ const original = resolve(source, 'thread-store.mjs');
 const data = readFileSync(original);
 if (!data.includes('options.chunkedRead')) throw new Error('The source core lacks complete-message pagination.');
 mkdirSync(destination, { recursive: true });
-copyFileSync(original, resolve(destination, 'thread-store.mjs'));
+const files = {};
+for (const name of ['thread-store.mjs', 'thread-sources.mjs', 'ssh-source.mjs']) {
+  const file = resolve(source, name);
+  files[name] = createHash('sha256').update(readFileSync(file)).digest('hex');
+  copyFileSync(file, resolve(destination, name));
+}
 writeFileSync(resolve(destination, 'provenance.json'), JSON.stringify({
   source: 'CCMemories/thread-store.mjs',
   sha256: createHash('sha256').update(data).digest('hex'),
+  files,
   maintenance: 'Generated from the CCMemories source; edit upstream and run sync-core. Do not maintain a second parser.',
 }, null, 2) + '\n');
 console.log('Shared conversation core synchronized.');
