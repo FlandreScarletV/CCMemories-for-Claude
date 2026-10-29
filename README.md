@@ -19,7 +19,10 @@
 ## ⚡️主要功能
 | MCP 工具 | 功能说明 |
 |---|---|
-| `list_work_threads` | 列出最近的 Codex 工作会话 |
-| `search_work_threads` | 根据标题或关键词搜索工作会话 |
-| `search_work_messages` | 搜索历史会话中的消息正文 |
-| `read_work_thread` | 读取指定会话，支持分页与历史续读 |
+| `list_work_threads` | 列出本机或远程服务器最近的 Codex 工作会话 |
+| `search_work_threads` | 根据标题或关键词搜索本机或远程服务器的工作会话 |
+| `search_work_messages` | 搜索本机或远程服务器历史会话中的消息正文 |
+| `read_work_thread` | 读取本机或远程服务器的指定会话，支持长消息、分页与历史续读 |
+| `list_local_files` | 列出本机或远程服务器允许目录中的文件和文件夹 |
+| `search_local_files` | 在本机或远程服务器的允许目录内搜索文件名，可选搜索文本内容 |
+| `read_local_file` | 读取本机或远程服务器允许目录内的文本、图片、支持的文档、压缩包及 SQLite 文件，支持分页续读 |
