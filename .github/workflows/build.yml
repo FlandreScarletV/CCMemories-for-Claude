@@ -12,10 +12,12 @@ permissions:
 jobs:
   package:
     runs-on: windows-latest
-    env:
-      XDG_CACHE_HOME: ${{ runner.temp }}/ccmemories-cache
-      npm_config_cache: ${{ runner.temp }}/ccmemories-cache/npm
     steps:
+      - name: Configure cache paths
+        shell: pwsh
+        run: |
+          "XDG_CACHE_HOME=$env:RUNNER_TEMP/ccmemories-cache" >> $env:GITHUB_ENV
+          "npm_config_cache=$env:RUNNER_TEMP/ccmemories-cache/npm" >> $env:GITHUB_ENV
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
