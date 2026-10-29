@@ -1,0 +1,10 @@
+node_modules/
+build/
+release/
+.env
+.env.*
+*.log
+*.mcpb
+*.zip
+.DS_Store
+Thumbs.db

@@ -1,0 +1,5 @@
+{
+  "source": "CCMemories/thread-store.mjs",
+  "sha256": "6db932ce1ecdd01c366d465b817773e9cc608f3fc49748d3479ef820738f1f30",
+  "maintenance": "Generated from the CCMemories source; edit upstream and run sync-core. Do not maintain a second parser."
+}

@@ -1,0 +1,67 @@
+{
+  "manifest_version": "0.3",
+  "name": "ccmemories-claude",
+  "display_name": "CCMemories for Claude",
+  "version": "0.1.2",
+  "description": "在 Claude Desktop Chat 中按需搜索和读取本机 Codex 工作会话。",
+  "author": {
+    "name": "Local developer"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.mjs",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/index.mjs"
+      ],
+      "env": {
+        "CODEX_CONVERSATION_ROOT": "${user_config.codex_home}",
+        "TEMP": "${user_config.cache_directory}",
+        "TMP": "${user_config.cache_directory}",
+        "XDG_CACHE_HOME": "${user_config.cache_directory}",
+        "NODE_COMPILE_CACHE": "${user_config.cache_directory}/compile-cache"
+      }
+    }
+  },
+  "user_config": {
+    "codex_home": {
+      "type": "directory",
+      "title": "Codex 数据目录",
+      "description": "选择包含 sessions、archived_sessions 和 session_index.jsonl 的实际 Codex 数据目录。",
+      "required": true
+    },
+    "cache_directory": {
+      "type": "directory",
+      "title": "MCP 缓存目录",
+      "description": "选择已创建的专用缓存目录，使用完整绝对路径。",
+      "required": true
+    }
+  },
+  "tools": [
+    {
+      "name": "list_work_threads",
+      "description": "列出最近的本地 Codex 工作会话"
+    },
+    {
+      "name": "search_work_threads",
+      "description": "按标题查找本地 Codex 工作会话"
+    },
+    {
+      "name": "search_work_messages",
+      "description": "搜索用户和助手可见消息"
+    },
+    {
+      "name": "read_work_thread",
+      "description": "读取会话并连续读取更早消息和长消息"
+    }
+  ],
+  "compatibility": {
+    "platforms": [
+      "win32"
+    ],
+    "runtimes": {
+      "node": ">=20"
+    }
+  }
+}

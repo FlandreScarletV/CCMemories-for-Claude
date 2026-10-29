@@ -1,0 +1,21 @@
+{
+  "name": "ccmemories-claude",
+  "version": "0.1.2",
+  "private": true,
+  "type": "module",
+  "description": "Local, read-only Codex conversation tools for Claude Desktop Chat",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server/index.mjs",
+    "release": "node scripts/package.mjs",
+    "sync-core": "node scripts/sync-core.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
+    "zod": "4.2.0"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "2.1.2",
+    "fflate": "0.8.3"
+  }
+}

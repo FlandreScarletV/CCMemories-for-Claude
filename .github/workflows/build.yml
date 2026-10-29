@@ -1,0 +1,33 @@
+name: Build release assets
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: windows-latest
+    env:
+      XDG_CACHE_HOME: ${{ runner.temp }}/ccmemories-cache
+      npm_config_cache: ${{ runner.temp }}/ccmemories-cache/npm
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run release
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ccmemories-release
+          path: release/*
+          compression-level: 0
+          if-no-files-found: error
