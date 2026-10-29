@@ -16,6 +16,8 @@
 
 > 继续读取这条会话更早的消息。
 
+> <img width="953" height="233" alt="image" src="https://github.com/user-attachments/assets/16fc97bb-26c9-4375-9e6f-1caff30a6880" />
+
 ## ⚡️主要功能
 | MCP 工具 | 功能说明 |
 |---|---|
