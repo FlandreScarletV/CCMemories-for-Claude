@@ -11,7 +11,8 @@ const data = readFileSync(original);
 if (!data.includes('options.chunkedRead')) throw new Error('The source core lacks complete-message pagination.');
 mkdirSync(destination, { recursive: true });
 const files = {};
-for (const name of ['thread-store.mjs', 'thread-sources.mjs', 'ssh-source.mjs']) {
+for (const name of ['thread-store.mjs', 'thread-sources.mjs', 'ssh-source.mjs',
+  'file-sources.mjs', 'local-files.mjs', 'file-parser.py', 'file-parser-requirements.txt']) {
   const file = resolve(source, name);
   files[name] = createHash('sha256').update(readFileSync(file)).digest('hex');
   copyFileSync(file, resolve(destination, name));

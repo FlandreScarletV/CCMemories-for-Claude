@@ -56,7 +56,7 @@ function removeStaging() {
   rmSync(actual, { recursive: true, force: true });
 }
 
-const runtime = ['manifest.json', 'package.json', 'package-lock.json', '.mcpbignore', 'thread-sources.example.json', 'server', 'vendor'];
+const runtime = ['manifest.json', 'package.json', 'package-lock.json', '.mcpbignore', 'thread-sources.example.json', 'local-files.example.json', 'server', 'vendor'];
 const documents = readdirSync(project).filter(name => /^(README|LICENSE|COPYING|CHANGELOG)(?:\..+)?$/i.test(name));
 for (const name of [...runtime, ...documents]) cpSync(join(project, name), join(staging, name), { recursive: true });
 const installation = spawnSync(process.execPath, [npmCli, 'ci', '--omit=dev', '--ignore-scripts',
@@ -85,7 +85,7 @@ for (const file of [...ownRuntime, ...executables]) {
     throw new Error(`The bundle omitted or changed a runtime file: ${name}`);
 }
 
-const sourceNames = ['package.json', 'package-lock.json', 'manifest.json', '.gitignore', '.gitattributes', '.mcpbignore', 'thread-sources.example.json', ...documents];
+const sourceNames = ['package.json', 'package-lock.json', 'manifest.json', '.gitignore', '.gitattributes', '.mcpbignore', 'thread-sources.example.json', 'local-files.example.json', ...documents];
 for (const folder of ['server', 'vendor', 'scripts', '.github', 'docs']) {
   if (existsSync(join(project, folder)))
     sourceNames.push(...filesIn(join(project, folder)).map(file => slash(relative(project, file))));

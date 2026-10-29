@@ -3,6 +3,7 @@ build/
 release/
 .runtime/
 thread-sources.json
+local-files.json
 *.local.json
 .env
 .env.*

@@ -2,8 +2,8 @@
   "manifest_version": "0.3",
   "name": "ccmemories-claude",
   "display_name": "CCMemories for Claude",
-  "version": "0.1.4",
-  "description": "在 Claude Desktop Chat 中按需搜索和读取本机或已配置 SSH 来源的 Codex 工作会话。",
+  "version": "0.1.5",
+  "description": "在 Claude Desktop Chat 中只读搜索和读取本机或 SSH 来源的 Codex 会话及允许目录内的文件。",
   "author": {
     "name": "Local developer"
   },
@@ -18,6 +18,7 @@
       "env": {
         "CODEX_CONVERSATION_ROOT": "${user_config.codex_home}",
         "CCMEMORIES_SOURCES_FILE": "${user_config.sources_file}",
+        "WORK_CONVERSATION_FILE_CONFIG": "${user_config.file_config}",
         "TEMP": "${user_config.cache_directory}",
         "TMP": "${user_config.cache_directory}",
         "XDG_CACHE_HOME": "${user_config.cache_directory}",
@@ -26,6 +27,13 @@
     }
   },
   "user_config": {
+    "file_config": {
+      "type": "file",
+      "title": "本机文件读取配置（可选）",
+      "description": "选择含 allowedRoots 的 JSON 文件；文档、压缩包和 SQLite 解析可用 pythonExecutable 配置 Python。留空时不开放本机文件。远程文件目录由 SSH 来源的 file_roots 配置。",
+      "required": false,
+      "default": ""
+    },
     "sources_file": {
       "type": "file",
       "title": "SSH 数据源配置文件（可选）",
@@ -62,6 +70,18 @@
     {
       "name": "read_work_thread",
       "description": "读取会话并连续读取更早消息和长消息"
+    },
+    {
+      "name": "list_local_files",
+      "description": "查看本机或 SSH 来源的允许目录及文件列表"
+    },
+    {
+      "name": "search_local_files",
+      "description": "在允许目录内搜索文件名或有界文本内容"
+    },
+    {
+      "name": "read_local_file",
+      "description": "只读读取本机或 SSH 来源的文本、图片和支持的文档、压缩包或 SQLite 文件"
     }
   ],
   "compatibility": {

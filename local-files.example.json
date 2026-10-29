@@ -1,0 +1,5 @@
+{
+  "allowedRoots": [],
+  "pythonExecutable": "python",
+  "immutableSqlite": true
+}

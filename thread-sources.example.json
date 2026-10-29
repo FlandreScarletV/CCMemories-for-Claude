@@ -4,7 +4,9 @@
       "id": "remote-server",
       "label": "Remote server",
       "type": "ssh",
-      "host": "your-ssh-host"
+      "host": "your-ssh-host",
+      "file_roots": [],
+      "python": "python3"
     }
   ]
 }
